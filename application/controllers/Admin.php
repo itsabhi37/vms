@@ -24,4 +24,21 @@ class Admin extends CI_Controller {
             }
         $this->load->model('mymodel');
     }
+    public function change_password(){
+        //Check whether the current password exist or not
+            $password=sha1($this->input->post('current_password'));
+            if ($this->mymodel->count_rows(array('pwd', 'uname'), array('pwd' => $password, 'uname' => $this->session->userdata('user_name')), 'logindetails', '') == 0) 
+            {
+                echo '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Oops!</strong> Invalid current password eneterd. Try to enter valid password again.</div>';
+            }
+            else
+            {
+                $new_password=sha1($this->input->post('new_password'));
+                if ($this->mymodel->update_data('uname',$this->session->userdata('user_name'), array('pwd' => $new_password), 'logindetails') == 1) 
+                {
+                    echo '<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Wow!</strong> Your password has been changed successfuly.</div>';
+                }
+            }
+    }
+    
 }

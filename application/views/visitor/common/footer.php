@@ -26,7 +26,7 @@
 
 <!-- Google analytics script-->
 <script type="text/javascript">
-    if (document.location.hostname == 'iamabhi.in') {
+    if (document.location.hostname == 'pratikborsadiya.in') {
         (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function() {
@@ -55,6 +55,43 @@ function printDiv(){
     popupwindow.document.write('<body onload="window.print()">'+ divtoPrint.innerHTML +'</body></html>');
     popupwindow.document.close();
 }
+
+//Change my password
+    $('form.password-change-form').on('submit', function (e) {
+        e.preventDefault();
+        //alert('OK');
+        var current_password = $.trim($('#current_password').val());
+        var new_password = $.trim($('#new_password').val());
+        var confirm_password = $.trim($('#confirm_password').val());
+
+        if (new_password != confirm_password) 
+        {
+            $('#password-change-info').html('<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Oops! Your New Password & Confirm Password must be same.</div>');
+        }
+        else
+        {
+            $('#password-change-info').html('');
+            // Ajax starts here
+            $.ajax({
+                type:"POST",
+                url:base_url+'visitor/change_password',
+                cache:false,
+                contentType:false,
+                processData:false,
+                data:new FormData(this),
+                beforeSend: function () {
+                    $('#passwordChangeModal > div > div').addClass('csspinner duo');
+                    $('.change-pass-btn').attr("disabled", "disabled");
+                    $('form.password-change-form')[0].reset(); 
+                },
+                success:function (responseData) {//responseData will be the result returned by the serverside
+                    $('.change-pass-btn').removeAttr("disabled", "disabled");
+                    $('#passwordChangeModal > div > div').removeClass('csspinner duo');
+                    $('#password-change-info').html(responseData);
+                }
+            });
+        }
+    });
 </script>
 </body>
 

@@ -98,6 +98,21 @@ class Home extends CI_Controller {
                 }
         }
     }
+
+    public function ForgotPassword()
+    {        
+        $usertype = $this->input->post('usertype');
+        $email = $this->input->post('email');
+        $findemail = $this->mymodel->ForgotPassword($email,$usertype);  
+        /*echo "<pre>";
+        print_r($findemail);*/      
+        if ($findemail) {
+            $this->mymodel->sendpassword($findemail);
+        } else {
+            echo "<script>alert('$email not found, please enter correct email id')</script>";
+            redirect(base_url(), 'refresh');
+        }
+    }
     
     public function logout(){
         $this->session->unset_userdata('user_name');

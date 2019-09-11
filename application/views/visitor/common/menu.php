@@ -19,8 +19,6 @@
         <li><a class="app-menu__item <?php $pg=$this->uri->segment(1); if($pg=="bookpc"){echo 'active' ;} ?>" href="<?=base_url('bookpc')?>"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label"> Book PC</span></a></li>
 
         <li><a class="app-menu__item <?php $pg=$this->uri->segment(1); if($pg=="visitor_report"){echo 'active' ;} ?>" href="<?=base_url('visitor_report')?>"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Reports</span></a></li>
-
-        <li><a class="app-menu__item <?php $pg=$this->uri->segment(1); if($pg=="visitor_report"){echo 'active' ;} ?>" href="<?=base_url('visitor_report')?>"><i class="app-menu__icon fa fa-cog fa-lg"></i><span class="app-menu__label">Settings</span></a></li>
     </ul>
     
 </aside>

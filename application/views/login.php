@@ -27,7 +27,7 @@
             <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
             <div class="form-group">
                 <label class="control-label">USERNAME</label>
-                <input class="form-control" name="txtuname" type="text" placeholder="User Id" value="<?php if(isset($_COOKIE["username"])) { echo $_COOKIE["username"]; } ?>" required autofocus>
+                <input class="form-control" name="txtuname" type="text" placeholder="Username" value="<?php if(isset($_COOKIE["username"])) { echo $_COOKIE["username"]; } ?>" required autofocus>
             </div>
             <div class="form-group">
                 <label class="control-label">PASSWORD</label>
@@ -54,12 +54,19 @@
                 <?php endif; ?>
             </div>
             </form>
-
-            <form class="forget-form" action="index.html">
+            <?php echo form_open('home/ForgotPassword','class="forget-form"');?>
                 <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
                 <div class="form-group">
+                    <label class="control-label">USER TYPE</label>
+                    <select class="form-control" name="usertype" required>
+                        <option value="">Please select User Type</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Visitor">Visitor</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="control-label">EMAIL</label>
-                    <input class="form-control" type="text" placeholder="Email">
+                    <input class="form-control" type="Email" name="email" placeholder="Email" required>
                 </div>
                 <div class="form-group btn-container">
                     <button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>RESET</button>
